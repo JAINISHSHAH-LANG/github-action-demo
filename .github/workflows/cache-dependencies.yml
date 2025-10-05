@@ -10,20 +10,24 @@ jobs:
   cache-job:
     runs-on: ubuntu-latest
     steps:
+      # Step 1: Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: prime-cache-b7afef5
-        id: prime-cache
+      # Step 2: Cache step
+      - name: prime-cache-b7afef5   # MUST match exactly
+        id: prime-cache             # ID used for outputs
         uses: actions/cache@v4
         with:
-          path: ./cache-test
+          path: ./cache-test        # folder to cache
           key: cache-b7afef5
 
+      # Step 3: Create a dummy file to make the cache reusable
       - name: Create dummy file
         run: |
           mkdir -p ./cache-test
           echo "Hello Cache!" > ./cache-test/dummy.txt
 
+      # Step 4: Show cache hit/miss
       - name: Show cache result
         run: echo "Cache hit? ${{ steps.prime-cache.outputs.cache-hit }}"
