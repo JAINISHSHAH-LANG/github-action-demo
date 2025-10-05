@@ -1,1 +1,25 @@
+name: Cache Example Workflow
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:  # allows manual triggering
+
+jobs:
+  cache-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Prime cache cache-b7afef5
+        id: prime-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/my-dependencies  # example path to cache
+          key: cache-b7afef5
+
+      - name: Show cache result
+        run: echo "Cache hit? ${{ steps.prime-cache.outputs.cache-hit }}"
 
