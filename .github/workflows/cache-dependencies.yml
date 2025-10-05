@@ -13,12 +13,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: prime-cache-b7afef5       # MUST match exactly
+      - name: prime-cache-b7afef5
         id: prime-cache
         uses: actions/cache@v4
         with:
-          path: ./cache-test            # dummy folder to cache
+          path: ./cache-test
           key: cache-b7afef5
+
+      - name: Create dummy file to test cache
+        run: echo "Hello Cache!" > ./cache-test/dummy.txt
 
       - name: Show cache result
         run: echo "Cache hit? ${{ steps.prime-cache.outputs.cache-hit }}"
+
