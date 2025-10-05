@@ -1,4 +1,4 @@
-name: Cache Example Workflow
+name: Cache Dependencies Workflow
 
 on:
   push:
@@ -13,11 +13,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: prime-cache-b7afef5   # <-- MUST match exactly
+      - name: prime-cache-b7afef5       # MUST match exactly
         id: prime-cache
         uses: actions/cache@v4
         with:
-          path: ~/.cache/my-dependencies   # replace with actual dependency path if needed
+          path: ./cache-test            # dummy folder to cache
           key: cache-b7afef5
 
       - name: Show cache result
